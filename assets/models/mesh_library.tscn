@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://r1eyq5y3blh6"]
+
+[ext_resource type="PackedScene" uid="uid://7agdplym2kok" path="res://assets/models/base_tile.blend" id="1_dqmbj"]
+[ext_resource type="PackedScene" uid="uid://b3y37alfc3m4o" path="res://assets/models/extractor_base.blend" id="2_sxmff"]
+[ext_resource type="PackedScene" uid="uid://b6k22uupg4fvh" path="res://assets/models/synthesizor_base.blend" id="3_fmn5q"]
+
+[node name="MeshLibrary" type="Node3D"]
+
+[node name="base_tile" parent="." instance=ExtResource("1_dqmbj")]
+
+[node name="extractor_base" parent="." instance=ExtResource("2_sxmff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="synthesizor_base" parent="." instance=ExtResource("3_fmn5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cms6ggmbk5v6c"]
+
+[ext_resource type="PackedScene" uid="uid://dgsei6qyfi01w" path="res://assets/models/collector.blend" id="1_t6mb4"]
+
+[node name="Collector" type="Node3D"]
+
+[node name="collector" parent="." instance=ExtResource("1_t6mb4")]
+
+[node name="CollectorTop" parent="collector" index="1"]
+visible = false
+
+[editable path="collector"]

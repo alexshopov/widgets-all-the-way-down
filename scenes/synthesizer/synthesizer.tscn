@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://da3vehbrq6dh"]
+
+[ext_resource type="Script" uid="uid://b7lmhalhcswcu" path="res://scenes/synthesizer/synthesizer.gd" id="1_0l478"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0l478"]
+albedo_color = Color(0.2901961, 0.2901961, 0.7490196, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8hqn0"]
+material = SubResource("StandardMaterial3D_0l478")
+top_radius = 1.0
+bottom_radius = 1.0
+radial_segments = 12
+rings = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ndljd"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gblqu"]
+bg_color = Color(0, 0.36233068, 0.1914534, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_y1yj3"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Synthesizer" type="Area3D"]
+script = ExtResource("1_0l478")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9626917, 0, -0.27060044, 0, 1, 0, 0.27060044, 0, 0.9626917, 0, 1, 0)
+mesh = SubResource("CylinderMesh_8hqn0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_ndljd")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(200, 27)
+
+[node name="Control" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport/Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 10)
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 27.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_gblqu")
+max_value = 10.0
+step = 1.0
+show_percentage = false
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5912657, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_y1yj3")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

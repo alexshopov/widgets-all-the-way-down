@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://dpbdoy3m54ft8"]
+
+[ext_resource type="Material" uid="uid://coqfe06oe4262" path="res://scenes/extractor/extractor_material.tres" id="1_6pipv"]
+[ext_resource type="Script" uid="uid://dy51ule4ckvb2" path="res://scenes/extractor/extractor.gd" id="1_731ah"]
+[ext_resource type="PackedScene" uid="uid://b7bxvhpewak02" path="res://scenes/extractor/stuff.tscn" id="2_cl5dx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6pipv"]
+size = Vector3(1.5, 1.5, 1.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cl5dx"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_731ah"]
+bg_color = Color(0, 0.36233068, 0.1914534, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_731ah"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Extractor" type="Area3D"]
+disable_mode = 1
+script = ExtResource("1_731ah")
+stuff_scene = ExtResource("2_cl5dx")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7458037, 0)
+size = Vector3(1.5, 1.5, 1.5)
+material = ExtResource("1_6pipv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7458037, 0)
+shape = SubResource("BoxShape3D_6pipv")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(200, 27)
+
+[node name="Control" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport/Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 10)
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_cl5dx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_731ah")
+max_value = 10.0
+step = 1.0
+show_percentage = false
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005657077, 1.6528882, -1.8269231)
+billboard = 1
+texture = SubResource("ViewportTexture_731ah")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

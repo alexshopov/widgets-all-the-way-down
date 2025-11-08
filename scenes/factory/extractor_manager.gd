@@ -1,0 +1,2 @@
+class_name ExtractorManager
+extends Node
