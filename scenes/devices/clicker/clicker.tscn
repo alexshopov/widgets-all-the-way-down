@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnga6kx4y812p"]
+
+[ext_resource type="PackedScene" uid="uid://ciq0wm3mff2mv" path="res://assets/models/clciker.blend" id="1_j8ce8"]
+[ext_resource type="Script" uid="uid://d087m5fm8nbi6" path="res://scenes/devices/clicker/clicker.gd" id="1_lmho4"]
+[ext_resource type="PackedScene" uid="uid://b7bxvhpewak02" path="res://scenes/devices/extractor/stuff.tscn" id="2_kggve"]
+[ext_resource type="PackedScene" uid="uid://br16li8wcmkjt" path="res://scenes/devices/extractor/increment_label.tscn" id="3_kctra"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lmho4"]
+size = Vector3(1.7814636, 2.1035156, 1.7825928)
+
+[node name="Clicker" type="Area3D"]
+script = ExtResource("1_lmho4")
+stuff_scene = ExtResource("2_kggve")
+increment_label_scene = ExtResource("3_kctra")
+
+[node name="Model" parent="." instance=ExtResource("1_j8ce8")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007369995, 1.4481944, 0.00018310547)
+shape = SubResource("BoxShape3D_lmho4")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+
+[editable path="Model"]

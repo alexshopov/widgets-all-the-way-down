@@ -1,33 +1,46 @@
+class_name HUD
 extends MarginContainer
 
+
+var _elapsed_time := 0.0
+var _active_factory: Factory :
+	set(value):
+		_active_factory = value
+		_synthesizer_panel.active_factory = _active_factory
+
 @onready
-var stuff_label: Label = %StuffLabel
+var _elapsed_time_label: Label = $ElapsedTimeLabel
 @onready
-var thingies_label: Label = %ThingiesLabel
+var _stuff_label: Label = %StuffLabel
 @onready
-var widget_label: Label = %WidgetLabel
+var _thingies_label: Label = %ThingiesLabel
 @onready
-var depth_label: Label = %DepthLabel
+var _widget_label: Label = %WidgetLabel
+@onready
+var _depth_label: Label = %DepthLabel
+@onready
+var _synthesizer_panel: PanelContainer = $SynthesizerPanel
 
 
 func _ready() -> void:
-	SignalBus.stuff_updated.connect(_on_stuff_updated)
-	SignalBus.thingies_updated.connect(_on_thingies_updated)
-	SignalBus.widgets_updated.connect(_on_widgets_updated)
+	_synthesizer_panel.visible = false
+	SignalBus.synthesizer_clicked.connect(func(): _synthesizer_panel.visible = true)
 	SignalBus.factory_level_changed.connect(_on_factory_level_changed)
 
 
-func _on_stuff_updated(stuff_count: int) -> void:
-	stuff_label.text = "Stuff: %d" % stuff_count
+func update_counts(resources: Dictionary) -> void:
+	_stuff_label.text = "Stuff: %d" % resources.stuff 
+	_thingies_label.text = "Thingies: %d" % resources.thingies 
+	_widget_label.text = "Widgets: %d" % resources.widgets
 
-
-func _on_thingies_updated(thingie_count: int) -> void:
-	thingies_label.text = "Thingies: %d" % thingie_count
-
-
-func _on_widgets_updated(widget_count: int) -> void:
-	widget_label.text = "Widgets: %d" % widget_count
-	
 
 func _on_factory_level_changed(factory_level: int) -> void:
-	depth_label.text = "Depth %d" % factory_level
+	_depth_label.text = "Depth %d" % factory_level
+
+
+func update_clock(delta: float) -> void:
+	_elapsed_time += delta
+	var minutes: float = floor(_elapsed_time / 60.0)
+	var seconds := fmod(_elapsed_time, 60)
+	
+	_elapsed_time_label.text = "%02d:%02d" % [minutes, seconds]

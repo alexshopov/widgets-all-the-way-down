@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://br16li8wcmkjt"]
+
+[node name="IncrementLabel" type="Label3D"]
+billboard = 1
+text = "+ 0"
+font_size = 128

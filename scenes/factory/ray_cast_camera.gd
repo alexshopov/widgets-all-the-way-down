@@ -16,13 +16,27 @@ func _physics_process(_delta: float) -> void:
     var result := space_state.intersect_ray(query)
     if result:
         var collider = result.collider
-        if collider is Extractor:
+        if collider is Clicker:
+            Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
             if Input.is_action_just_pressed("left_click"):
                 collider.handle_click()
-        elif collider is Miniaturizer:
+                Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+        elif collider is Synthesizer:
+            Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
             if Input.is_action_just_pressed("left_click"):
-                collider.push_or_pop()
-        elif collider is GridMap:
-            var cell := gridmap.local_to_map(result.position)
-            # print(cell)
+                SignalBus.synthesizer_clicked.emit()
+                Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+        elif collider is Miniaturizer:
+            Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
+            if Input.is_action_just_pressed("left_click"):
+                collider.push()
+                Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+            elif Input.is_action_just_pressed("right_click"):
+                collider.pop()
+                Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+        else:
+            Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+    else:
+        Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+        
 

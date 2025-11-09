@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpbdoy3m54ft8"]
+[gd_scene load_steps=9 format=3 uid="uid://dpbdoy3m54ft8"]
 
-[ext_resource type="Material" uid="uid://coqfe06oe4262" path="res://scenes/extractor/extractor_material.tres" id="1_6pipv"]
-[ext_resource type="Script" uid="uid://dy51ule4ckvb2" path="res://scenes/extractor/extractor.gd" id="1_731ah"]
-[ext_resource type="PackedScene" uid="uid://b7bxvhpewak02" path="res://scenes/extractor/stuff.tscn" id="2_cl5dx"]
+[ext_resource type="Material" uid="uid://coqfe06oe4262" path="res://scenes/devices/extractor/extractor_material.tres" id="1_6pipv"]
+[ext_resource type="Script" uid="uid://dy51ule4ckvb2" path="res://scenes/devices/extractor/extractor.gd" id="1_731ah"]
+[ext_resource type="PackedScene" uid="uid://b7bxvhpewak02" path="res://scenes/devices/extractor/stuff.tscn" id="2_cl5dx"]
+[ext_resource type="PackedScene" uid="uid://br16li8wcmkjt" path="res://scenes/devices/extractor/increment_label.tscn" id="4_gyldr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6pipv"]
 size = Vector3(1.5, 1.5, 1.5)
@@ -35,9 +36,10 @@ viewport_path = NodePath("SubViewport")
 disable_mode = 1
 script = ExtResource("1_731ah")
 stuff_scene = ExtResource("2_cl5dx")
+increment_label_scene = ExtResource("4_gyldr")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7458037, 0)
+[node name="Model" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 size = Vector3(1.5, 1.5, 1.5)
 material = ExtResource("1_6pipv")
 
@@ -66,11 +68,10 @@ offset_bottom = 27.0
 theme_override_styles/background = SubResource("StyleBoxFlat_cl5dx")
 theme_override_styles/fill = SubResource("StyleBoxFlat_731ah")
 max_value = 10.0
-step = 1.0
 show_percentage = false
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005657077, 1.6528882, -1.8269231)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005657077, 1.7126185, 0.0008239746)
 billboard = 1
 texture = SubResource("ViewportTexture_731ah")
 
