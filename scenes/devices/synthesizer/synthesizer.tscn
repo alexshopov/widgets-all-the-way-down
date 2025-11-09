@@ -2,20 +2,20 @@
 
 [ext_resource type="Script" uid="uid://b7lmhalhcswcu" path="res://scenes/devices/synthesizer/synthesizer.gd" id="1_0l478"]
 [ext_resource type="PackedScene" uid="uid://br16li8wcmkjt" path="res://scenes/devices/extractor/increment_label.tscn" id="2_8hqn0"]
+[ext_resource type="PackedScene" uid="uid://jtb6vci1054x" path="res://assets/models/synthesizor.blend" id="3_yb0cb"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0l478"]
-shading_mode = 2
-albedo_color = Color(0.2901961, 0.2901961, 0.7490196, 1)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2lr34"]
+height = 2.5517578
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_8hqn0"]
-material = SubResource("StandardMaterial3D_0l478")
-top_radius = 1.0
-bottom_radius = 1.0
-radial_segments = 12
-rings = 0
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ndljd"]
-size = Vector3(2, 2, 2)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yb0cb"]
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gblqu"]
 bg_color = Color(0, 0.36233068, 0.1914534, 1)
@@ -35,13 +35,11 @@ viewport_path = NodePath("SubViewport")
 script = ExtResource("1_0l478")
 increment_label_scene = ExtResource("2_8hqn0")
 
-[node name="Model" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.9626917, 0, -0.27060044, 0, 1, 0, 0.27060044, 0, 0.9626917, 0, 1, 0)
-mesh = SubResource("CylinderMesh_8hqn0")
+[node name="Model" parent="." instance=ExtResource("3_yb0cb")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_ndljd")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2758789, 0)
+shape = SubResource("CylinderShape3D_2lr34")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
@@ -61,14 +59,17 @@ custom_minimum_size = Vector2(200, 10)
 layout_mode = 0
 offset_right = 100.0
 offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_yb0cb")
 theme_override_styles/fill = SubResource("StyleBoxFlat_gblqu")
 max_value = 10.0
 step = 1.0
 show_percentage = false
 
 [node name="ProgressBarSprite" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5912657, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7897215, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_y1yj3")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+
+[editable path="Model"]

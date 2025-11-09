@@ -24,15 +24,15 @@ func _physics_process(_delta: float) -> void:
         elif collider is Synthesizer:
             Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
             if Input.is_action_just_pressed("left_click"):
+                if not StoryManager.extractor_tutorial_02_shown:
+                    StoryManager.extractor_tutorial_02()
+
                 SignalBus.synthesizer_clicked.emit()
                 Input.set_default_cursor_shape(Input.CURSOR_ARROW)
         elif collider is Miniaturizer:
             Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
             if Input.is_action_just_pressed("left_click"):
-                collider.push()
-                Input.set_default_cursor_shape(Input.CURSOR_ARROW)
-            elif Input.is_action_just_pressed("right_click"):
-                collider.pop()
+                collider.traverse()
                 Input.set_default_cursor_shape(Input.CURSOR_ARROW)
         else:
             Input.set_default_cursor_shape(Input.CURSOR_ARROW)

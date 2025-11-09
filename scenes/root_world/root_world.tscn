@@ -1,11 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://b656x745d8gxo"]
+[gd_scene load_steps=6 format=3 uid="uid://b656x745d8gxo"]
 
 [ext_resource type="Script" uid="uid://bqxbxh001myos" path="res://scenes/root_world/root_world.gd" id="1_7gu44"]
 [ext_resource type="PackedScene" uid="uid://ba4ocdhtoiep2" path="res://scenes/ui/hud.tscn" id="1_11qyb"]
 [ext_resource type="PackedScene" uid="uid://bjhkgosvfni1w" path="res://scenes/factory/factory.tscn" id="1_w32bt"]
+[ext_resource type="PackedScene" uid="uid://dbh3qtul8sl43" path="res://scenes/ui/story_panel.tscn" id="3_r3n6d"]
+[ext_resource type="Script" uid="uid://uwrks1qcwo3v" path="res://scenes/root_world/story_ui.gd" id="4_o05dm"]
 
 [node name="RootWorld" type="Node3D" groups=["root_world"]]
 script = ExtResource("1_7gu44")
 factory_scene = ExtResource("1_w32bt")
 
 [node name="HUD" parent="." instance=ExtResource("1_11qyb")]
+
+[node name="StoryUI" type="Control" parent="." groups=["story_ui"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_o05dm")
+
+[node name="StoryPanel" parent="StoryUI" instance=ExtResource("3_r3n6d")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -733.0
+offset_top = -268.0
+offset_right = -133.0
+offset_bottom = -68.0
+grow_horizontal = 0
+grow_vertical = 0

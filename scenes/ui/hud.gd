@@ -19,11 +19,14 @@ var _widget_label: Label = %WidgetLabel
 @onready
 var _depth_label: Label = %DepthLabel
 @onready
-var _synthesizer_panel: PanelContainer = $SynthesizerPanel
+var _synthesizer_panel: PanelContainer = %SynthesizerPanel
+@onready
+var _info_panel: PanelContainer = %InfoPanel
 
 
 func _ready() -> void:
 	_synthesizer_panel.visible = false
+	_info_panel.visible = false
 	SignalBus.synthesizer_clicked.connect(func(): _synthesizer_panel.visible = true)
 	SignalBus.factory_level_changed.connect(_on_factory_level_changed)
 
@@ -44,3 +47,11 @@ func update_clock(delta: float) -> void:
 	var seconds := fmod(_elapsed_time, 60)
 	
 	_elapsed_time_label.text = "%02d:%02d" % [minutes, seconds]
+
+
+func show_info_panel(title: String, info: String) -> void:
+	_info_panel.show_info_panel(title, info)
+
+
+func hide_info_panel() -> void:
+	_info_panel.hide_info_panel()

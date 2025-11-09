@@ -2,7 +2,12 @@ class_name Synthesizer
 extends Device
 
 var _parent: Factory
-var _stuff_count := 0
+var _stuff_count := 0 :
+	set(value):
+		_stuff_count = value
+
+		if _stuff_count == 10 and not StoryManager.extractor_tutorial_shown:
+			StoryManager.extractor_tutorial()
 
 
 @onready

@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://btt54ku2fob08"]
+[gd_scene load_steps=4 format=3 uid="uid://btt54ku2fob08"]
 
+[ext_resource type="StyleBox" uid="uid://dgwagh3tc04kw" path="res://scenes/ui/ui_panel_styles.tres" id="1_4uyux"]
 [ext_resource type="Script" uid="uid://dnlee8k3pyxlw" path="res://scenes/ui/synthesizer_panel.gd" id="1_wg7be"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hqnrr"]
@@ -7,61 +8,107 @@ font_size = 24
 
 [node name="SynthesizerPanel" type="PanelContainer"]
 custom_minimum_size = Vector2(250, 0)
+offset_right = 298.0
+offset_bottom = 120.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("1_4uyux")
 script = ExtResource("1_wg7be")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MainPanel" type="MarginContainer" parent="."]
 layout_mode = 2
 theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
+theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="MarginPanel" type="VBoxContainer" parent="MarginContainer"]
+[node name="MarginPanel" type="VBoxContainer" parent="MainPanel"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="MarginContainer/MarginPanel"]
+[node name="Label" type="Label" parent="MainPanel/MarginPanel"]
 layout_mode = 2
 text = "Synthesizer"
 label_settings = SubResource("LabelSettings_hqnrr")
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginPanel"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginPanel/VBoxContainer"]
+[node name="ExtractorContainer" type="HBoxContainer" parent="MainPanel/MarginPanel/VBoxContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 
-[node name="Label" type="Label" parent="MarginContainer/MarginPanel/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MainPanel/MarginPanel/VBoxContainer/ExtractorContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Build Extractor "
 
-[node name="BuildExtractorButton" type="Button" parent="MarginContainer/MarginPanel/VBoxContainer/HBoxContainer"]
+[node name="BuildExtractorButton" type="Button" parent="MainPanel/MarginPanel/VBoxContainer/ExtractorContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "10 Stuff"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/MarginPanel/VBoxContainer"]
+[node name="FactoryContainer" type="HBoxContainer" parent="MainPanel/MarginPanel/VBoxContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 
-[node name="Label" type="Label" parent="MarginContainer/MarginPanel/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="MainPanel/MarginPanel/VBoxContainer/FactoryContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Build Thingie "
+text = "Build Factory "
 
-[node name="BuildThingieButton" type="Button" parent="MarginContainer/MarginPanel/VBoxContainer/HBoxContainer2"]
+[node name="BuildFactoryButton" type="Button" parent="MainPanel/MarginPanel/VBoxContainer/FactoryContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "50 Stuff"
 
-[connection signal="pressed" from="MarginContainer/MarginPanel/VBoxContainer/HBoxContainer/BuildExtractorButton" to="." method="_on_build_extractor_button_pressed"]
-[connection signal="pressed" from="MarginContainer/MarginPanel/VBoxContainer/HBoxContainer2/BuildThingieButton" to="." method="_on_build_thingie_button_pressed"]
+[node name="ThingieContainer" type="HBoxContainer" parent="MainPanel/MarginPanel/VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="Label" type="Label" parent="MainPanel/MarginPanel/VBoxContainer/ThingieContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Build Thingie "
+
+[node name="BuildThingieButton" type="Button" parent="MainPanel/MarginPanel/VBoxContainer/ThingieContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "100 Stuff"
+
+[node name="WidgetContainer" type="HBoxContainer" parent="MainPanel/MarginPanel/VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="Label" type="Label" parent="MainPanel/MarginPanel/VBoxContainer/WidgetContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Build Widget "
+
+[node name="BuildWidgetButton" type="Button" parent="MainPanel/MarginPanel/VBoxContainer/WidgetContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "100 Thingies"
+
+[connection signal="mouse_entered" from="MainPanel/MarginPanel/VBoxContainer/ExtractorContainer" to="." method="_on_extractor_container_mouse_entered"]
+[connection signal="mouse_exited" from="MainPanel/MarginPanel/VBoxContainer/ExtractorContainer" to="." method="_on_extractor_container_mouse_exited"]
+[connection signal="pressed" from="MainPanel/MarginPanel/VBoxContainer/ExtractorContainer/BuildExtractorButton" to="." method="_on_build_extractor_button_pressed"]
+[connection signal="mouse_entered" from="MainPanel/MarginPanel/VBoxContainer/FactoryContainer" to="." method="_on_factory_container_mouse_entered"]
+[connection signal="mouse_exited" from="MainPanel/MarginPanel/VBoxContainer/FactoryContainer" to="." method="_on_factory_container_mouse_exited"]
+[connection signal="pressed" from="MainPanel/MarginPanel/VBoxContainer/FactoryContainer/BuildFactoryButton" to="." method="_on_build_factory_button_pressed"]
+[connection signal="mouse_entered" from="MainPanel/MarginPanel/VBoxContainer/ThingieContainer" to="." method="_on_thingie_container_mouse_entered"]
+[connection signal="mouse_exited" from="MainPanel/MarginPanel/VBoxContainer/ThingieContainer" to="." method="_on_thingie_container_mouse_exited"]
+[connection signal="pressed" from="MainPanel/MarginPanel/VBoxContainer/ThingieContainer/BuildThingieButton" to="." method="_on_build_thingie_button_pressed"]

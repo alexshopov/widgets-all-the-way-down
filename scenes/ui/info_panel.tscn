@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://5lk32tool3r0"]
+
+[ext_resource type="StyleBox" uid="uid://dgwagh3tc04kw" path="res://scenes/ui/ui_panel_styles.tres" id="1_rr1xh"]
+[ext_resource type="Script" uid="uid://cfd8h18wuk82x" path="res://scenes/ui/info_panel.gd" id="2_rr1xh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fompm"]
+font_size = 24
+
+[node name="InfoPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(300, 100)
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("1_rr1xh")
+script = ExtResource("2_rr1xh")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Title"
+label_settings = SubResource("LabelSettings_fompm")
+horizontal_alignment = 1
+
+[node name="InfoLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "Lorem Ipsum dolor sit"
+fit_content = true

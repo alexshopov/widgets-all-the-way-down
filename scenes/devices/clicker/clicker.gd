@@ -12,6 +12,7 @@ var _can_click := true
 @onready
 var _clicker_button: MeshInstance3D = $Model/ClickerButton
 
+
 func _ready() -> void:
     _stuff_per_click = 1 * (parent.depth + 1)
 
@@ -19,6 +20,10 @@ func _ready() -> void:
 func handle_click() -> void:
     if not _can_click:
         return
+
+    if not StoryManager.intro_shown:
+        StoryManager.show_intro()
+
 
     _can_click = false
     var tween := create_tween()
