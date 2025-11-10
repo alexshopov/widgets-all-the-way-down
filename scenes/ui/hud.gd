@@ -7,6 +7,7 @@ var _active_factory: Factory :
 	set(value):
 		_active_factory = value
 		_synthesizer_panel.active_factory = _active_factory
+		_synthesizer_panel.visible = false
 
 @onready
 var _elapsed_time_label: Label = $ElapsedTimeLabel
@@ -15,13 +16,13 @@ var _stuff_label: Label = %StuffLabel
 @onready
 var _thingies_label: Label = %ThingiesLabel
 @onready
-var _widget_label: Label = %WidgetLabel
-@onready
 var _depth_label: Label = %DepthLabel
 @onready
 var _synthesizer_panel: PanelContainer = %SynthesizerPanel
 @onready
 var _info_panel: PanelContainer = %InfoPanel
+@onready
+var _widget_bar: ProgressBar = $WidgetBar
 
 
 func _ready() -> void:
@@ -34,7 +35,8 @@ func _ready() -> void:
 func update_counts(resources: Dictionary) -> void:
 	_stuff_label.text = "Stuff: %d" % resources.stuff 
 	_thingies_label.text = "Thingies: %d" % resources.thingies 
-	_widget_label.text = "Widgets: %d" % resources.widgets
+
+	_widget_bar.value = resources.widgets
 
 
 func _on_factory_level_changed(factory_level: int) -> void:

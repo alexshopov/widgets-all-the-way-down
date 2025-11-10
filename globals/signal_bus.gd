@@ -10,4 +10,6 @@ signal synthesizer_clicked
 signal buy_extractor_clicked
 signal buy_factory_clicked
 signal buy_thingie_clicked
+signal buy_widget_clicked
 
+signal widgets_completed

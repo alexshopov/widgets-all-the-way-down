@@ -18,7 +18,7 @@ func _physics_process(_delta: float) -> void:
         var collider = result.collider
         if collider is Clicker:
             Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
-            if Input.is_action_just_pressed("left_click"):
+            if Input.is_action_pressed("left_click"):
                 collider.handle_click()
                 Input.set_default_cursor_shape(Input.CURSOR_ARROW)
         elif collider is Synthesizer:

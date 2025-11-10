@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://b656x745d8gxo"]
+[gd_scene load_steps=9 format=3 uid="uid://b656x745d8gxo"]
 
 [ext_resource type="Script" uid="uid://bqxbxh001myos" path="res://scenes/root_world/root_world.gd" id="1_7gu44"]
 [ext_resource type="PackedScene" uid="uid://ba4ocdhtoiep2" path="res://scenes/ui/hud.tscn" id="1_11qyb"]
 [ext_resource type="PackedScene" uid="uid://bjhkgosvfni1w" path="res://scenes/factory/factory.tscn" id="1_w32bt"]
 [ext_resource type="PackedScene" uid="uid://dbh3qtul8sl43" path="res://scenes/ui/story_panel.tscn" id="3_r3n6d"]
 [ext_resource type="Script" uid="uid://uwrks1qcwo3v" path="res://scenes/root_world/story_ui.gd" id="4_o05dm"]
+[ext_resource type="AudioStream" uid="uid://duqq241nq86kt" path="res://assets/music/the_ascent_version_b.mp3" id="6_o05dm"]
+[ext_resource type="StyleBox" uid="uid://dgwagh3tc04kw" path="res://scenes/ui/ui_panel_styles.tres" id="7_hqwm4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_73qck"]
+font_size = 64
 
 [node name="RootWorld" type="Node3D" groups=["root_world"]]
 script = ExtResource("1_7gu44")
@@ -29,9 +34,60 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -733.0
-offset_top = -268.0
-offset_right = -133.0
-offset_bottom = -68.0
+offset_left = -636.0
+offset_top = -313.0
+offset_right = -36.0
+offset_bottom = -31.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_o05dm")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true
+
+[node name="WinScreen" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -329.0
+offset_top = -176.5
+offset_right = 329.0
+offset_bottom = 176.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("7_hqwm4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WinScreen"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Congrats" type="Label" parent="WinScreen/VBoxContainer"]
+layout_mode = 2
+text = "Congratulations!"
+label_settings = SubResource("LabelSettings_73qck")
+horizontal_alignment = 1
+
+[node name="StatsLabel" type="RichTextLabel" parent="WinScreen/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "You assembled 100 Widgets in 00:00"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="RetryButton" type="Button" parent="WinScreen/VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 48
+text = "Try to beat your time"
+
+[connection signal="pressed" from="WinScreen/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]

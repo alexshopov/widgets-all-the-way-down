@@ -13,10 +13,16 @@ var _depth: int :
 
 @onready
 var _hud: HUD = $HUD
+@onready
+var _win_screen: PanelContainer = $WinScreen
+@onready
+var _stats_label: RichTextLabel = %StatsLabel
 
 
 func _ready() -> void:
+	StoryManager.reset()
 	StoryManager.story_ui = $StoryUI
+	_win_screen.visible = false
 
 	_depth = 0
 	var new_factory := spawn_factory()
@@ -27,6 +33,8 @@ func _ready() -> void:
 	SignalBus.buy_extractor_clicked.connect(_on_buy_extractor_clicked)
 	SignalBus.buy_factory_clicked.connect(_on_buy_factory_clicked)
 	SignalBus.buy_thingie_clicked.connect(_on_buy_thingie_clicked)
+	SignalBus.buy_widget_clicked.connect(_on_buy_widget_clicked)
+	SignalBus.widgets_completed.connect(_on_widgets_completed)
 
 
 func _physics_process(delta: float) -> void:
@@ -46,7 +54,6 @@ func spawn_factory() -> Factory:
 
 func push() -> void:
 	if _depth == 4:
-		# show overflow warning
 		return
 
 	var camera := _active_factory.camera
@@ -55,8 +62,8 @@ func push() -> void:
 	tween.tween_callback(func():
 		_depth += 1
 
-		remove_child(_active_factory)
 		_active_factory.camera.fov = 48
+		remove_child(_active_factory)
 
 		if not _factories.has(_depth):
 			var new_factory := spawn_factory()
@@ -66,6 +73,12 @@ func push() -> void:
 
 		_hud._active_factory = _active_factory
 		add_child(_active_factory)
+
+		if not StoryManager.factory_tutorial_03_shown:
+			StoryManager.factory_tutorial_03()
+		if _depth == 4:
+			if not StoryManager.max_depth_tutorial_shown:
+				StoryManager.max_depth_tutorial()
 	)
 
 
@@ -104,3 +117,16 @@ func _on_buy_factory_clicked() -> void:
 
 func _on_buy_thingie_clicked() -> void:
 	_active_factory.build_thingie()
+
+
+func _on_buy_widget_clicked() -> void:
+	_active_factory.build_widget()
+
+
+func _on_widgets_completed() -> void:
+	_stats_label.text = "You assembled 20 Widgets in %s" % _hud._elapsed_time_label.text
+	_win_screen.visible = true
+
+
+func _on_retry_button_pressed() -> void:
+	get_tree().reload_current_scene()

@@ -17,7 +17,7 @@ func close_panel() -> void:
 
 # show when game starts
 func show_intro() -> void:
-	var msg_01 := "We need you to manufacture [color=blue]100 WIDGETS[/color] as quickly as possible."
+	var msg_01 := "We need you to manufacture [color=blue]20 WIDGETS[/color] as quickly as possible."
 	var msg_02 := "Press the big red button to start generating [color=blue]STUFF[/color] which will be fed into the [color=green]Synthesizer[/color]."
 
 	show_panel("%s %s" % [msg_01, msg_02])
@@ -32,7 +32,7 @@ func show_extractor_tutorial_01() -> void:
 
 # show when synthesizer is clicked the first time
 func show_extractor_tutorial_02() -> void:
-	var msg_01 := "We'll need [color=blue]10,000 STUFF[/color] to create all the [color=blue]WIDGETS[/color]. We need to speed this up."
+	var msg_01 := "We'll need [color=blue]5,000 STUFF[/color] to create all the [color=blue]WIDGETS[/color]. We need to speed this up."
 	var msg_02 := "Start building [color=green]Extractors[/color] to automatically generate more [color=blue]STUFF[/color]"
 
 	show_panel("%s\n%s" % [msg_01, msg_02])
@@ -40,10 +40,10 @@ func show_extractor_tutorial_02() -> void:
 
 # show when 2 extractors have been built
 func show_factory_tutorial_01() -> void:
-	var msg_01 := "This is still taking too long. We have to go deeper. We can build a copy of this factory within the factory to speed thing up."
-	var msg_02 := "Build a [color=green]Factory[/color]. The new factory will operate twice as fast as this one."
+	var msg_01 := "This is still taking too long. We have to go deeper. Use the [color=green]Synthesizer[/color] to build a copy of this [color=green]Factory[/color]."
+	var msg_02 := "The new factory will operate twice as fast as this one."
 
-	show_panel("%s\n%s" % [msg_01, msg_02])
+	show_panel("%s %s" % [msg_01, msg_02])
 	StoryManager.extractor_tutorial_02_shown = true
 
 # show when the second factory is buile
@@ -53,3 +53,20 @@ func show_factory_tutorial_02() -> void:
 
 	show_panel("%s\n%s" % [msg_01, msg_02])
 	StoryManager.extractor_tutorial_02_shown = true
+
+# show when the second factory is buile
+func show_factory_tutorial_03() -> void:
+	var msg_01 := "Time works differently down here. [color=green]Extractors[/color] operate twice as fast. Click the [color=green]Rings[/color] above the [color=green]Synthesizer[/color] to move up one dimension. Any [color=blue]THINGIES[/color] you craft will automatically be sent up with you."
+	var msg_02 := "You can also try to go even deeper..."
+
+	show_panel("%s\n%s" % [msg_01, msg_02])
+	StoryManager.factory_tutorial_03_shown = true
+
+
+# show when the second factory is buile
+func show_max_depth_tutorial() -> void:
+	var msg_01 := "You've reach sub-dimension 4. It's too dangerous to go further without risking a dimensional stack overflow."
+	var msg_02 := "Synthesize the [color=blue]THINGIES[/color] we need and send them back up to dimension-0 where we can craft the [color=blue]WIDGETS[/color]"
+
+	show_panel("%s\n%s" % [msg_01, msg_02])
+	StoryManager.factory_tutorial_03_shown = true

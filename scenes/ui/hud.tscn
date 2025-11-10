@@ -2,9 +2,9 @@
 
 [ext_resource type="LabelSettings" uid="uid://dkndw4v4uf4g1" path="res://scenes/ui/label_settings.tres" id="1_0mwgc"]
 [ext_resource type="Script" uid="uid://dnbxip1iwniaf" path="res://scenes/ui/hud.gd" id="1_hqnrr"]
+[ext_resource type="StyleBox" uid="uid://drsqb0ok5yqcx" path="res://scenes/ui/widget_bar_full.tres" id="3_136eg"]
 [ext_resource type="PackedScene" uid="uid://btt54ku2fob08" path="res://scenes/ui/synthesizer_panel.tscn" id="3_bo48s"]
 [ext_resource type="PackedScene" uid="uid://5lk32tool3r0" path="res://scenes/ui/info_panel.tscn" id="4_8qguk"]
-[ext_resource type="StyleBox" uid="uid://do8lu1rea1g2" path="res://scenes/ui/widget_bar_in_progress.tres" id="5_136eg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8qguk"]
 font_size = 36
@@ -71,35 +71,17 @@ size_flags_horizontal = 0
 text = "Thingies : 0"
 label_settings = ExtResource("1_0mwgc")
 
-[node name="Columns" type="HBoxContainer" parent="."]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 10
-
-[node name="Container" type="Container" parent="Columns"]
-custom_minimum_size = Vector2(785, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="SynthesizerPanel" parent="Columns" instance=ExtResource("3_bo48s")]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="InfoPanel" parent="Columns" instance=ExtResource("4_8qguk")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="WidgetBar" type="ProgressBar" parent="."]
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_8qguk")
-theme_override_styles/fill = ExtResource("5_136eg")
+theme_override_styles/fill = ExtResource("3_136eg")
+max_value = 20.0
 step = 1.0
 show_percentage = false
 
-[node name="WidgetLabel" type="Label" parent="ProgressBar"]
+[node name="WidgetLabel" type="Label" parent="WidgetBar"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -117,3 +99,28 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Widgets"
 label_settings = ExtResource("1_0mwgc")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 60
+
+[node name="Columns" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Container" type="Container" parent="MarginContainer/Columns"]
+custom_minimum_size = Vector2(1250, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SynthesizerPanel" parent="MarginContainer/Columns" instance=ExtResource("3_bo48s")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="InfoPanel" parent="MarginContainer/Columns" instance=ExtResource("4_8qguk")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0

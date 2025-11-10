@@ -5,9 +5,11 @@ const MAX_DEPTH = 4
 
 var extractor_cost := 10
 @export
-var factory_cost := 50
+var factory_cost := 25
 @export
-var thingie_cost := 100
+var thingie_cost := 25
+@export
+var widget_cost := 10
 @export
 var base_tick_length: float = 5
 
@@ -103,5 +105,8 @@ func build_factory() -> void:
 
 
 func build_thingie() -> void:
-	resources.stuff -= thingie_cost
-	resources.thingies += 1
+	_synthesizer.build_thingie()
+
+
+func build_widget() -> void:
+	_synthesizer.build_widget()

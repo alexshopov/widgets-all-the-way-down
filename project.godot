@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Widgets All the Way Down"
-run/main_scene="uid://b656x745d8gxo"
+run/main_scene="uid://hr11smo76y8q"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
